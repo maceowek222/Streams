@@ -3,6 +3,7 @@ package org.example;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +14,24 @@ public class Main {
                 new Employee(4, "Sidor", "Sidorov", 4000.0, LocalDate.of(1993, 1, 1)),
                 new Employee(5, "Vasya", "Vasiliev", 5000.0, LocalDate.of(1994, 2, 2))
         );
+
+        Stream<Employee> streamofCollection = employees.stream();
+        streamofCollection.forEach(System.out::println);
+
+        System.out.println("--------------------------------------------------");
+
+        Stream<Employee> streamBuilder = Stream.<Employee>builder().add(employees.get(0)).add(employees.get(1)).add(employees.get(2)).add(employees.get(3)).add(employees.get(4)).build();
+        streamBuilder.forEach(System.out::println);
+
+        System.out.println("--------------------------------------------------");
+
+
+
+        System.out.println("--------------------------------------------------");
+
+        Stream streamOf = Stream.of(employees);
+        streamOf.forEach(System.out::println);
+        System.out.println("--------------------------------------------------");
 
 
         employees.stream()
