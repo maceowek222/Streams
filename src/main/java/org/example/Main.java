@@ -12,12 +12,12 @@ public class Main {
     public static void main(String[] args) {
         List<Employee> employees = Arrays.asList(
                 new Employee(1, "John", "Smith", 1000.0, LocalDate.of(1990, 10, 10)),
-                new Employee(2, "Ivan", "Ivanov", 2000.0, LocalDate.of(1991, 11, 11)),
-                new Employee(3, "Petr", "Petrov", 3000.0, LocalDate.of(1992, 12, 12)),
-                new Employee(4, "Sidor", "Sidorov", 4000.0, LocalDate.of(1993, 1, 1)),
-                new Employee(5, "Vasya", "Vasiliev", 5000.0, LocalDate.of(1994, 2, 2))
+                new Employee(2, "Jan", "Nowak", 2000.0, LocalDate.of(1991, 11, 11)),
+                new Employee(3, "Ela", "Belka", 3000.0, LocalDate.of(1992, 12, 12)),
+                new Employee(4, "Michal", "Walka", 4000.0, LocalDate.of(1993, 1, 1)),
+                new Employee(5, "Tomasz", "Tomkowicz", 5000.0, LocalDate.of(1994, 2, 2))
         );
-
+        System.out.println("-----------------------Zad 1------------------------");
         Stream<Employee> streamofCollection = employees.stream().limit(3);
         streamofCollection.forEach(System.out::println);
 
@@ -35,26 +35,28 @@ public class Main {
 
         Stream<List<Employee>> streamOf = Stream.of(employees);
         streamOf.forEach(System.out::println);
-        System.out.println("--------------------------------------------------");
+        System.out.println("-----------------------Zad 2--------------------------");
         Stream<Employee> concatstream = Stream.concat(employees.stream(), employees.stream());
         concatstream.forEach(System.out::println);
 
-        System.out.println("--------------------------------------------------");
+        System.out.println("----------------------Zad 3----------------------------");
         Stream<Employee> stream1 = employees.stream().limit(4);
         Stream<Employee> stream2 = Stream.<Employee>builder().add(employees.get(1)).add(employees.get(3)).build();
         Stream<Employee> stream3 = Stream.<Employee>builder().add(employees.get(0)).add(employees.get(4)).add(employees.get(2)).build();
 
-        List<Employee> employeeList = stream1.collect(Collectors.toList());
+        List<Employee> employeeList = stream1.toList();
         Set<Employee> employeeSet = stream2.collect(Collectors.toSet());
         Map<Long, Double> idSalaryMap = stream3.collect(Collectors.toMap(Employee::getId, Employee::getSalary));
         System.out.println("Mapa: " + idSalaryMap);
 
 
-        System.out.println("--------------------------------------------------");
+        System.out.println("----------------------Zad 4----------------------------");
+        Stream<Object> stream4 = employees.stream().limit(4)
+                .map(e -> e.getFirstname().toUpperCase());
+                stream4.forEach(System.out::println);
 
 
-
-
+        System.out.println("----------------------Zad 5-------------------------");
 
         employees.stream()
                 .filter(e -> e.getFirstname().endsWith("a"))
