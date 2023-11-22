@@ -61,8 +61,10 @@ public class Main {
         employees.stream()
                 .filter(e -> e.getFirstname().endsWith("a"))
                 .forEach(System.out::println);
+        System.out.println("----------------------Zad 6-------------------------");
     }
-    }
+
+}
 
 
 class Employee {
