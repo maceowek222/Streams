@@ -1,10 +1,7 @@
 package org.example;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,6 +59,21 @@ public class Main {
                 .filter(e -> e.getFirstname().endsWith("a"))
                 .forEach(System.out::println);
         System.out.println("----------------------Zad 6-------------------------");
+        Stream<Employee> stream5 = employees.stream();
+        stream5.sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .forEach(System.out::println);
+
+        System.out.println("----------------------Zad 7-------------------------");
+        List<Employee> stream6 = employees.stream().toList();
+        Map<String,List<Employee>> map = stream6.stream()
+                .collect(Collectors.groupingBy(Employee::getFirstname));
+
+        map.forEach((firstName, employeeGroup) -> {
+            System.out.println("Grupa pracowników o imieniu " + firstName + ":");
+            employeeGroup.forEach(System.out::println);
+            System.out.println();
+        });
+
     }
 
 }
